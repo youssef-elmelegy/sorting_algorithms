@@ -8,14 +8,14 @@
  */
 size_t len(listint_t *list)
 {
-	size_t len = 0;
+size_t len = 0;
 
-	while (list)
-	{
-		len++;
-		list = list->next;
-	}
-	return (len);
+while (list)
+{
+len++;
+list = list->next;
+}
+return (len);
 }
 
 /**
@@ -25,25 +25,25 @@ size_t len(listint_t *list)
  */
 void switch_nodes(listint_t **list, listint_t **p)
 {
-	listint_t *first, *sec, *third, *fourth;
+listint_t *first, *sec, *third, *fourth;
 
-	first = (*p)->prev;
-	sec = *p;
-	third = (*p)->next;
-	fourth = (*p)->next->next;
-	sec->next = fourth;
+first = (*p)->prev;
+sec = *p;
+third = (*p)->next;
+fourth = (*p)->next->next;
+sec->next = fourth;
 
-	if (fourth)
-		fourth->prev = sec;
-	third->next = sec;
-	third->prev = sec->prev;
+if (fourth)
+fourth->prev = sec;
+third->next = sec;
+third->prev = sec->prev;
 
-	if (first)
-		first->next = third;
-	else
-		*list = third;
-	sec->prev = third;
-	*p = third;
+if (first)
+first->next = third;
+else
+*list = third;
+sec->prev = third;
+*p = third;
 }
 
 /**
@@ -53,41 +53,41 @@ void switch_nodes(listint_t **list, listint_t **p)
  */
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *p;
-	int sorted = 0;
+listint_t *p;
+int sorted = 0;
 
-	if (!list || !*list || len(*list) < 2)
-		return;
-	p = *list;
-	while (!sorted)
-	{
-		sorted = 1;
-		while (p->next)
-		{
-			if (p->n > p->next->n)
-			{
-				sorted = 0;
-				switch_nodes(list, &p);
-				print_list(*list);
-			}
-			else
-				p = p->next;
-		}
-		if (sorted)
-			break;
-		p = p->prev;
-		while (p->prev)
-		{
-			if (p->n < p->prev->n)
-			{
-				sorted = 0;
-				p = p->prev;
-				switch_nodes(list, &p);
-				print_list(*list);
-			}
-			else
-				p = p->prev;
-		}
-	}
+if (!list || !*list || len(*list) < 2)
+return;
+p = *list;
+while (!sorted)
+{
+sorted = 1;
+while (p->next)
+{
+if (p->n > p->next->n)
+{
+sorted = 0;
+switch_nodes(list, &p);
+print_list(*list);
+}
+else
+p = p->next;
+}
+if (sorted)
+break;
+p = p->prev;
+while (p->prev)
+{
+if (p->n < p->prev->n)
+{
+sorted = 0;
+p = p->prev;
+switch_nodes(list, &p);
+print_list(*list);
+}
+else
+p = p->prev;
+}
+}
 }
 

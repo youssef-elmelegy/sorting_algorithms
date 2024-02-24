@@ -9,17 +9,16 @@
 
 void swaplist(listint_t **list, listint_t *big, listint_t *small)
 {
-        if (big->prev)
-                big->prev->next = small;
-        else
-		*list = small;
-        if (small->next)
-                small->next->prev = big;
-        
-        small->prev = big->prev;
-        big->prev = small;
-        big->next = small->next;
-        small->next = big;
+if (big->prev)
+big->prev->next = small;
+else
+*list = small;
+if (small->next)
+small->next->prev = big;
+small->prev = big->prev;
+big->prev = small;
+big->next = small->next;
+small->next = big;
 }
 
 /**
@@ -29,22 +28,21 @@ void swaplist(listint_t **list, listint_t *big, listint_t *small)
 
 void insertion_sort_list(listint_t **list)
 {
-        listint_t *key, *temp;
+listint_t *key, *temp;
 
-        if (list == NULL || (*list)->next == NULL || (*list) == NULL)
-                return;
-        key = (*list)->next;
+if (list == NULL || (*list)->next == NULL || (*list) == NULL)
+return;
+key = (*list)->next;
 
-        while (key)
-        {
-                temp = key->prev;
-                while (temp && (key->n < temp->n))
-                {
-                        swaplist(list, temp, key);
-                        print_list(*list);
-                        temp = key->prev;
-                }
-                key = key->next;
-        }
-        
+while (key)
+{
+temp = key->prev;
+while (temp && (key->n < temp->n))
+{
+swaplist(list, temp, key);
+print_list(*list);
+temp = key->prev;
+}
+key = key->next;
+}
 }
